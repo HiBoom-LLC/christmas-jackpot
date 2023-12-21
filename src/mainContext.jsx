@@ -4,20 +4,7 @@ export const MainContext = createContext({});
 const MainContextProvider = ({ children }) => {
   const [activePage, setActivePage] = useState(0);
   const [pageHistory, setPageHistory] = useState(undefined);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const page = localStorage.getItem("page");
-    const history = localStorage.getItem("pageHistory");
-
-    if (page && !isNaN(Number(page)) && history && !isNaN(Number(page))) {
-      setPageHistory(Number(history));
-      setActivePage(Number(page));
-    } else {
-      localStorage.clear();
-    }
-    setLoading(false);
-  }, []);
+  const [loading, setLoading] = useState(false);
 
   const changePage = (pageNum) => {
     setPageHistory(activePage);

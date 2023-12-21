@@ -19,9 +19,8 @@ const Jackpot = () => {
     try {
       const game1Json = localStorage.getItem("game1");
       const game1Data = JSON.parse(game1Json);
-      if (game1Data.ready === true) {
-        setState(game1Data);
-      }
+
+      setState(game1Data);
       setLoadingMain(false);
     } catch (err) {
       setLoadingMain(false);

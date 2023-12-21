@@ -22,7 +22,7 @@ const MenuPage = () => {
         <button
           className="button"
           onClick={() => {
-            navigate("/game1");
+            navigate("/game1/config");
           }}
         >
           <img
