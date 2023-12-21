@@ -2,9 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import "./index.css";
 import Slot from "react-slot-machine";
 import jackbotLottie from "../../assets/jackpot.json";
-import fireworkJson from "../../assets/firework.json";
-import fireworkTop from "../../assets/firework-top.json";
-import fireworkBottom from "../../assets/firework-bottom.json";
 import Lottie from "lottie-react";
 import GameButton from "../../game-button";
 import CustomModal from "../../congratulations-modal/CustomModal";
@@ -68,39 +65,6 @@ const Jackpot = () => {
         justifySelf: "center",
       }}
     >
-      {showModal && (
-        <Lottie
-          className="firework-animation-left"
-          animationData={fireworkJson}
-          autoplay={true}
-          loop={true}
-        />
-      )}
-      {showModal && (
-        <Lottie
-          className="firework-animation-right"
-          animationData={fireworkJson}
-          autoplay={true}
-          loop={true}
-        />
-      )}
-
-      {showModal && (
-        <Lottie
-          className="firework-animation-top"
-          animationData={fireworkTop}
-          autoplay={true}
-          loop={true}
-        />
-      )}
-      {showModal && (
-        <Lottie
-          className="firework-animation-bottom"
-          animationData={fireworkBottom}
-          autoplay={true}
-          loop={true}
-        />
-      )}
       <CustomModal
         show={showModal}
         onHide={() => setShowModal(false)}
