@@ -1,0 +1,64 @@
+.titleWrapper {
+  width: 100%;
+  margin-bottom: 40px;
+}
+.titleRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.titleRow:last-child {
+  margin-top: -30px;
+}
+
+.title {
+  width: max-content;
+  font-size: 90px;
+  margin: 0 15px;
+  stroke: 1px;
+  color: white;
+  text-align: center;
+  font-family: "BoyarskyMon", Courier, monospace;
+  text-shadow: 2px 2px #333333;
+}
+.buttons {
+  display: flex;
+}
+
+.button {
+  /* height: 100px;
+    width: 100px; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  background-color: white;
+  padding: 16px;
+  border-radius: 20px;
+  margin: 10px;
+  outline: none;
+  border: none;
+  transition: all 0.2s ease;
+}
+.button:hover {
+  scale: 1.1;
+}
+
+.button img {
+  margin: -20px;
+  margin-left: 30px;
+}
+.button h5 {
+  font-size: 14px;
+  text-align: left;
+  font-family: "ChCooper", Courier, monospace;
+  margin: 0;
+  line-height: 0.9;
+  margin-top: 12px;
+}
+.button p {
+  width: 170px;
+  font-size: 12px;
+  text-align: left;
+  margin: 0;
+  margin-top: 4px;
+}

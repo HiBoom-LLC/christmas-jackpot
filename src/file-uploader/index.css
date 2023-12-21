@@ -1,0 +1,40 @@
+.fileUploader {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px dashed white;
+  outline: none;
+  display: flex;
+  padding: 20px 40px;
+  color: white;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  /* background-color: white; */
+  cursor: pointer;
+}
+
+.fileInfoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.fileInfo {
+  display: flex;
+  align-items: center;
+}
+
+.fileInfo p {
+  margin-left: 16px;
+}
+
+.fileInfoWrapper button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  transition: all 0.3s ease;
+}

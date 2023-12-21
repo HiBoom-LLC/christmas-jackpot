@@ -1,0 +1,27 @@
+.header {
+  max-width: 1024px;
+  margin: 0 auto;
+  height: 80px;
+}
+.headerItems {
+  padding: 16px;
+}
+.backButton {
+  border-radius: 8px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  transition: all 0.3s ease;
+}
+.backButton:hover {
+  filter: brightness(0.8);
+}

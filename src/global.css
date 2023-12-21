@@ -1,0 +1,54 @@
+@font-face {
+  font-family: "BoyarskyMon";
+  src: local("BoyarskyMon"), url("/BoyarskyMon.tff");
+}
+@font-face {
+  font-family: "ChCooper";
+  src: local("ChCooper"), url("/ChCooper.tff");
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: "BoyarskyMon", Courier, monospace;
+}
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.pageLayout {
+  max-width: 1024px;
+  min-width: 1024px;
+  margin: 0 auto;
+  height: calc(100vh - 80px - 64px);
+}
+
+.pageContent {
+  height: 100%;
+  margin: 0;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.backgroundWrapper {
+  width: 100%;
+  padding: 16px;
+  height: fit-content;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
