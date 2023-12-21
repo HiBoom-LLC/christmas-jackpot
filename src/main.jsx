@@ -6,9 +6,10 @@ import MainContextProvider from "./mainContext.jsx";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./layout/index.jsx";
 import Page3 from "./page3/index.jsx";
-import Page2 from "./page2/index.jsx";
 import Jackpot from "./page1/jackpot/index.jsx";
 import Config from "./page1/config/index.jsx";
+import ConfigGame2 from "./page2/config/index.jsx";
+import Game from "./page2/game/index.jsx";
 
 const Root = () => {
   const router = createBrowserRouter([
@@ -38,9 +39,19 @@ const Root = () => {
       path: "game2",
       element: (
         <Layout>
-          <Page2 />
+          <Outlet />
         </Layout>
       ),
+      children: [
+        {
+          path: "config",
+          element: <ConfigGame2 />,
+        },
+        {
+          path: "game",
+          element: <Game />,
+        },
+      ],
     },
     {
       path: "game3",

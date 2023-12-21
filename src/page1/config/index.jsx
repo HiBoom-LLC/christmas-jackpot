@@ -92,7 +92,7 @@ const Config = () => {
       <div className="formGroup">
         <label>Ирсэн цаг</label>
         <input
-          className="timeInput"
+          className="input"
           placeholder="2023-12-31 00:00:00"
           value={timeString}
           onChange={(e) => {

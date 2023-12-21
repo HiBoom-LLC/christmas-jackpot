@@ -3,6 +3,7 @@ import "./index.css";
 import { IoChevronBack } from "react-icons/io5";
 import { MainContext } from "../mainContext";
 import Snowfall from "react-snowfall";
+import { ToastContainer } from "react-toastify";
 
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
@@ -14,7 +15,13 @@ const Layout = ({ children }) => {
           width: "100%",
         }}
       />
-
+      <ToastContainer
+        position="top-right"
+        newestOnTop={true}
+        hideProgressBar={false}
+        pauseOnHover
+        theme="colored"
+      />
       <div className="header">
         <div className="headerItems">
           {pageHistory !== undefined ? (
