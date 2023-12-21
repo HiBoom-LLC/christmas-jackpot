@@ -4,6 +4,7 @@ import Slot from "react-slot-machine";
 import jackbotLottie from "../../assets/jackpot.json";
 import Lottie from "lottie-react";
 import GameButton from "../../game-button";
+import CustomModal from "../../congratulations-modal/CustomModal";
 
 const Jackpot = () => {
   const [loadingMain, setLoadingMain] = useState(true);
@@ -14,6 +15,7 @@ const Jackpot = () => {
   const lottieRef = useRef(null);
   const [randomNumber, setRandomNumber] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [winner, setWinner] = useState(null);
 
   useEffect(() => {
@@ -47,6 +49,12 @@ const Jackpot = () => {
     return null;
   }
 
+  const onCongratulations = () => {
+    setTimeout(() => {
+      setShowModal(true);
+    }, 1000);
+  };
+
   return (
     <div
       style={{
@@ -57,6 +65,11 @@ const Jackpot = () => {
         justifySelf: "center",
       }}
     >
+      <CustomModal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        randomNumber={winner?.__EMPTY}
+      />
       <div
         style={{
           padding: "0 120px",
@@ -80,6 +93,7 @@ const Jackpot = () => {
                 times={2}
                 onEnd={() => {
                   setLoading(false);
+                  onCongratulations();
                   setWinner(state.usersData[randomNumber + 1]);
                 }}
                 className="slotPicker"
@@ -107,16 +121,7 @@ const Jackpot = () => {
             SPIN
           </GameButton>
         </div>
-        {winner ? (
-          <h1
-            style={{
-              color: "white",
-              fontSize: 46,
-              textAlign: "center",
-              textShadow: "2px 2px black",
-            }}
-          >{`Winner: ${winner.__EMPTY}`}</h1>
-        ) : null}
+
         {/* <div className="tableWrapper">
             <table className="table">
               <thead>

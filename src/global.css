@@ -69,6 +69,21 @@ body {
   backdrop-filter: blur(10px);
 }
 
+.ReactModal__Overlay {
+  background-color: #0000003d !important;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
 .input {
   padding: 12px 16px;
   font-size: 16px;
