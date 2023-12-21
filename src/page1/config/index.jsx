@@ -27,16 +27,27 @@ const Config = () => {
         const worksheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[worksheetName];
         const data = XLSX.utils.sheet_to_json(worksheet);
-        setUserData(
-          data
-            .filter((rowData) => rowData.__rowNum__ > 8)
-            .sort((a, b) => {
-              if (a.__EMPTY_1 > b.__EMPTY_1) {
-                return 1;
-              }
-              return -1;
-            })
-        );
+        const sortedData = data
+          .filter((rowData) => rowData.__rowNum__ > 8)
+          .sort((a, b) => {
+            if (a.__EMPTY_1 > b.__EMPTY_1) {
+              return 1;
+            }
+            return -1;
+          });
+
+        let groupData = {};
+        sortedData.map((item) => {
+          if (!groupData.hasOwnProperty(item.__EMPTY)) {
+            groupData[item.__EMPTY] = sortedData.filter(
+              (it) => it.__EMPTY === item.__EMPTY
+            );
+          }
+        });
+        const uniqueData = Object.keys(groupData).map((key) => {
+          return groupData[key][0];
+        });
+        setUserData(uniqueData);
       }
     };
   };
@@ -60,7 +71,6 @@ const Config = () => {
     localStorage.setItem(
       "game1",
       JSON.stringify({
-        ready: true,
         usersData: userData,
         time: timeString,
       })

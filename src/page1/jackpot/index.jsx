@@ -14,6 +14,7 @@ const Jackpot = () => {
   const lottieRef = useRef(null);
   const [randomNumber, setRandomNumber] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [winner, setWinner] = useState(null);
 
   useEffect(() => {
     try {
@@ -27,9 +28,16 @@ const Jackpot = () => {
     }
   }, []);
 
-  const random = () => {
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+  }
+
+  const startSpin = () => {
+    setWinner(null);
     setLoading(true);
-    const num = Math.floor(Math.random() * state.usersData.length);
+    const num = getRandomInt(1, state.usersData.length);
     setRandomNumber(num);
     lottieRef.current.stop();
     lottieRef.current.play();
@@ -68,17 +76,18 @@ const Jackpot = () => {
               <div className="top-shadow"></div>
               <Slot
                 target={randomNumber}
-                duration={15000}
-                times={1}
+                duration={5000}
+                times={2}
                 onEnd={() => {
                   setLoading(false);
+                  setWinner(state.usersData[randomNumber + 1]);
                 }}
                 className="slotPicker"
               >
                 {state.usersData.map((item, index) => {
                   return (
                     <div key={`slot_${index}`} className="slotItem">
-                      {index + 1}
+                      {item.__EMPTY}
                     </div>
                   );
                 })}
@@ -94,10 +103,20 @@ const Jackpot = () => {
             marginTop: 80,
           }}
         >
-          <GameButton onClick={random} loading={loading}>
+          <GameButton onClick={startSpin} loading={loading}>
             SPIN
           </GameButton>
         </div>
+        {winner ? (
+          <h1
+            style={{
+              color: "white",
+              fontSize: 46,
+              textAlign: "center",
+              textShadow: "2px 2px black",
+            }}
+          >{`Winner: ${winner.__EMPTY}`}</h1>
+        ) : null}
         {/* <div className="tableWrapper">
             <table className="table">
               <thead>
