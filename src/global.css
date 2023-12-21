@@ -1,10 +1,10 @@
 @font-face {
   font-family: "BoyarskyMon";
-  src: local("BoyarskyMon"), url("/BoyarskyMon.tff");
+  src: url("../public/BoyarskyMon.ttf");
 }
 @font-face {
   font-family: "ChCooper";
-  src: local("ChCooper"), url("/ChCooper.tff");
+  src: url("../public/ChCooper.ttf");
 }
 
 html,
