@@ -118,8 +118,14 @@ const Jackpot = () => {
             marginTop: 80,
           }}
         >
-          <GameButton onClick={startSpin} loading={loading}>
-            SPIN
+          <GameButton
+            onClick={startSpin}
+            loading={loading}
+            style={{
+              width: 300,
+            }}
+          >
+            Эхлүүлэх
           </GameButton>
         </div>
 

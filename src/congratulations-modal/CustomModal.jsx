@@ -25,6 +25,7 @@ const customStyles = {
   },
 };
 
+// eslint-disable-next-line react/prop-types
 const CustomModal = ({ show, onHide, title, desc }) => {
   return (
     <div>
