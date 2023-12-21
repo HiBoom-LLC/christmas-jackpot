@@ -53,7 +53,6 @@ const Jackpot = () => {
   }
 
   const onCongratulations = () => {
-    console.log(randomNumber);
     setTimeout(() => {
       setShowModal(true);
     }, 1000);
@@ -105,7 +104,7 @@ const Jackpot = () => {
       <CustomModal
         show={showModal}
         onHide={() => setShowModal(false)}
-        randomNumber={randomNumber}
+        randomNumber={winner?.__EMPTY}
       />
       <div
         style={{
@@ -158,16 +157,7 @@ const Jackpot = () => {
             SPIN
           </GameButton>
         </div>
-        {winner ? (
-          <h1
-            style={{
-              color: "white",
-              fontSize: 46,
-              textAlign: "center",
-              textShadow: "2px 2px black",
-            }}
-          >{`Winner: ${winner.__EMPTY}`}</h1>
-        ) : null}
+
         {/* <div className="tableWrapper">
             <table className="table">
               <thead>
