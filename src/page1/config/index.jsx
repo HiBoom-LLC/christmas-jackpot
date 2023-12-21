@@ -5,11 +5,13 @@ import Button from "../../button";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const Config = ({ setState = () => {} }) => {
+const Config = () => {
   const [timeString, setTimeString] = useState("");
   const [userData, setUserData] = useState([]);
+  const navigate = useNavigate();
 
   const fileUpload = (file) => {
     if (!file) {
@@ -63,11 +65,7 @@ const Config = ({ setState = () => {} }) => {
         time: timeString,
       })
     );
-    setState({
-      ready: true,
-      usersData: userData,
-      time: timeString,
-    });
+    navigate("/game1/jackpot");
   };
 
   return (
