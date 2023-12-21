@@ -25,7 +25,7 @@ const customStyles = {
   },
 };
 
-const CustomModal = ({ show, onHide, randomNumber }) => {
+const CustomModal = ({ show, onHide, title, desc }) => {
   return (
     <div>
       {show && (
@@ -70,7 +70,7 @@ const CustomModal = ({ show, onHide, randomNumber }) => {
         closeTimeoutMS={100}
       >
         <div className="modal-body">
-          <div className="lucky-title">Азтаны код</div>
+          <div className="lucky-title">{title}</div>
           <div className="lottie-animation">
             <Lottie
               className="lottie-firework"
@@ -91,7 +91,7 @@ const CustomModal = ({ show, onHide, randomNumber }) => {
               loop={true}
             />
           </div>
-          <div className="lucky-number">{randomNumber}</div>
+          <div className="lucky-number">{desc}</div>
           <div className="modal-footer">
             <Button onClick={onHide} className="close-button">
               Хаах

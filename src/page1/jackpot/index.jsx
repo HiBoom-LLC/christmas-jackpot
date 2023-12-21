@@ -67,8 +67,9 @@ const Jackpot = () => {
     >
       <CustomModal
         show={showModal}
+        title="Азтаны код"
+        desc={winner?.__EMPTY || ""}
         onHide={() => setShowModal(false)}
-        randomNumber={winner?.__EMPTY}
       />
       <div
         style={{

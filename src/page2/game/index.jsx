@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import "./index.css";
 import GameButton from "../../game-button";
+import CustomModal from "../../congratulations-modal/CustomModal";
 
 const Game = () => {
   const [loadingMain, setLoadingMain] = useState(true);
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     try {
@@ -24,6 +26,12 @@ const Game = () => {
 
   return (
     <div className="backgroundWrapper">
+      <CustomModal
+        show={showModal}
+        title={"Ялагч"}
+        desc={"Хишигбаяр"}
+        onHide={() => setShowModal(false)}
+      />
       <h1
         className="title"
         style={{
@@ -50,6 +58,7 @@ const Game = () => {
                   <td key={`in_${index}`}>
                     <input
                       className="input"
+                      placeholder="Шүүгчийн нэр"
                       type="text"
                       style={{
                         width: "calc(100% - 32px)",
@@ -70,6 +79,7 @@ const Game = () => {
                     <input
                       className="input"
                       type="text"
+                      placeholder="Оролцогчын нэр"
                       style={{
                         width: "calc(100% - 32px)",
                       }}
@@ -83,6 +93,7 @@ const Game = () => {
                           <input
                             className="input"
                             type="number"
+                            placeholder="Оноо"
                             style={{
                               width: "calc(100% - 32px)",
                             }}
@@ -102,7 +113,9 @@ const Game = () => {
         }}
       >
         <GameButton
-          onClick={() => {}}
+          onClick={() => {
+            setShowModal(true);
+          }}
           loading={loading}
           style={{
             fontSize: 24,
