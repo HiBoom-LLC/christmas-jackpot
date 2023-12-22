@@ -67,9 +67,10 @@ const Jackpot = () => {
     >
       <CustomModal
         show={showModal}
-        title="Азтаны код"
-        desc={winner?.__EMPTY || ""}
+        title="Азтан код"
+        data={winner?.__EMPTY || ""}
         onHide={() => setShowModal(false)}
+        gameKey="game1"
       />
       <div
         style={{
@@ -128,29 +129,6 @@ const Jackpot = () => {
             Эхлүүлэх
           </GameButton>
         </div>
-
-        {/* <div className="tableWrapper">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>№</th>
-                  <th>Ажилтны код</th>
-                  <th>Ирсэн цаг</th>
-                </tr>
-              </thead>
-              <tbody>
-                {state.usersData?.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{item.__EMPTY}</td>
-                      <td>{item.__EMPTY_1}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div> */}
       </div>
     </div>
   );

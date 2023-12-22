@@ -9,6 +9,7 @@ import Button from "../button";
 import fireworkSmallJson from "../../src/assets/firework.json";
 import fireworkTop from "../../src/assets/firework-top.json";
 import fireworkBottom from "../../src/assets/firework-bottom.json";
+import Leaderboard from "../leaderboard";
 
 const customStyles = {
   content: {
@@ -26,7 +27,7 @@ const customStyles = {
 };
 
 // eslint-disable-next-line react/prop-types
-const CustomModal = ({ show, onHide, title, desc }) => {
+const CustomModal = ({ show, onHide, title, data, gameKey }) => {
   return (
     <div>
       {show && (
@@ -72,27 +73,33 @@ const CustomModal = ({ show, onHide, title, desc }) => {
       >
         <div className="modal-body">
           <div className="lucky-title">{title}</div>
-          <div className="lottie-animation">
-            <Lottie
-              className="lottie-firework"
-              animationData={fireworkJson}
-              autoplay={true}
-              loop={true}
-            />
-            <Lottie
-              className="lottie"
-              animationData={championJson}
-              autoplay={true}
-              loop={true}
-            />
-            <Lottie
-              className="lottie-firework"
-              animationData={fireworkJson}
-              autoplay={true}
-              loop={true}
-            />
-          </div>
-          <div className="lucky-number">{desc}</div>
+          {gameKey == "game1" ? (
+            <>
+              <div className="lottie-animation">
+                <Lottie
+                  className="lottie-firework"
+                  animationData={fireworkJson}
+                  autoplay={true}
+                  loop={true}
+                />
+                <Lottie
+                  className="lottie"
+                  animationData={championJson}
+                  autoplay={true}
+                  loop={true}
+                />
+                <Lottie
+                  className="lottie-firework"
+                  animationData={fireworkJson}
+                  autoplay={true}
+                  loop={true}
+                />
+              </div>
+              <div className="lucky-number">{data}</div>
+            </>
+          ) : (
+            <Leaderboard data={data} />
+          )}
           <div className="modal-footer">
             <Button onClick={onHide} className="close-button">
               Хаах

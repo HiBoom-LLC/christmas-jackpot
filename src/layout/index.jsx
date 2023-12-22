@@ -1,13 +1,13 @@
-import { useContext } from "react";
 import "./index.css";
 import { IoChevronBack } from "react-icons/io5";
-import { MainContext } from "../mainContext";
 import Snowfall from "react-snowfall";
 import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router";
 
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
-  const { prevPage, pageHistory } = useContext(MainContext);
+  const navigate = useNavigate();
+
   return (
     <div className="background">
       <Snowfall
@@ -24,16 +24,21 @@ const Layout = ({ children }) => {
       />
       <div className="header">
         <div className="headerItems">
-          {pageHistory !== undefined ? (
-            <button
-              className="backButton"
-              onClick={() => {
-                prevPage();
-              }}
-            >
-              <IoChevronBack size={32} color={"white"} />
-            </button>
-          ) : null}
+          {/* <img
+            className="logo"
+            src={"/logoVitarium.jpg"}
+            alt="vitariumLog"
+            height={100}
+            width={160}
+          /> */}
+          <button
+            className="backButton"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            <IoChevronBack size={32} color={"white"} />
+          </button>
         </div>
       </div>
       <div className="pageLayout">

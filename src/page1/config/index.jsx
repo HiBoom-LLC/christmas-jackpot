@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 const Config = () => {
   const [timeString, setTimeString] = useState("");
   const [userData, setUserData] = useState([]);
+  const [excelData, setExcelData] = useState([]);
   const navigate = useNavigate();
 
   const fileUpload = (file) => {
@@ -27,7 +28,7 @@ const Config = () => {
         const worksheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[worksheetName];
         const data = XLSX.utils.sheet_to_json(worksheet);
-        const sortedData = data
+        let sortedData = data
           .filter((rowData) => rowData.__rowNum__ > 8)
           .sort((a, b) => {
             if (a.__EMPTY_1 > b.__EMPTY_1) {
@@ -44,10 +45,19 @@ const Config = () => {
             );
           }
         });
+        
         const uniqueData = Object.keys(groupData).map((key) => {
           return groupData[key][0];
         });
-        setUserData(uniqueData);
+
+        sortedData = uniqueData.sort((a, b) => {
+          if (a.__EMPTY_1 > b.__EMPTY_1) {
+            return 1;
+          }
+          return -1;
+        });
+        setExcelData(sortedData);
+        setUserData(sortedData);
       }
     };
   };
@@ -89,6 +99,7 @@ const Config = () => {
         <label>Оролцогчдын бүртгэл файл</label>
         <FileUploader onChange={fileUpload} />
       </div>
+
       <div className="formGroup">
         <label>Ирсэн цаг</label>
         <input
@@ -97,9 +108,42 @@ const Config = () => {
           value={timeString}
           onChange={(e) => {
             setTimeString(e.target.value);
+            if (e.target.value.length > 12) {
+              const date = dayjs(e.target.value);
+
+              setUserData(
+                excelData.filter((item) => {
+                  const date2 = dayjs(item.__EMPTY_1);
+                  return date2.diff(date) < 0;
+                })
+              );
+            }
           }}
         />
       </div>
+      <div className="tableWrapper">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>№</th>
+              <th>Ажилтны код</th>
+              <th>Ирсэн цаг</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userData?.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.__EMPTY}</td>
+                  <td>{item.__EMPTY_1}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div className="total">Нийт орологч: {userData.length}</div>
       <div className="d-flex justify-content-end">
         <Button
           onClick={() => {

@@ -1,3 +1,33 @@
+.tableWrapper {
+  margin-top: 16px;
+  height: 300px;
+  overflow-y: auto;
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  color: white;
+  border-collapse: collapse;
+}
+.table tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.total {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  padding: 16px;
+}
+table th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
 .formGroup {
   margin-top: 32px;
   display: flex;

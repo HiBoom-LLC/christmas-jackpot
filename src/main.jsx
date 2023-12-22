@@ -11,7 +11,7 @@ import Config from "./page1/config/index.jsx";
 import ConfigGame2 from "./page2/config/index.jsx";
 import Game from "./page2/game/index.jsx";
 
-const Root = () => {
+export const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -68,7 +68,7 @@ const Root = () => {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <MainContextProvider>
-      <Root />
+      <Router />
     </MainContextProvider>
   </React.StrictMode>
 );

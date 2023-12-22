@@ -1,14 +1,9 @@
 import "./index.css";
 
 // eslint-disable-next-line react/prop-types
-const GameButton = ({ children, onClick, loading, style }) => {
+const GameButton = ({ children, loading, ...props }) => {
   return (
-    <button
-      disabled={loading}
-      className={"game-button orange"}
-      onClick={onClick}
-      style={style}
-    >
+    <button disabled={loading} className={"game-button orange"} {...props}>
       {loading ? <span className="loader"></span> : children}
     </button>
   );

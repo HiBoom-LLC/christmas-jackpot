@@ -65,7 +65,7 @@ body {
   padding: 16px;
   height: fit-content;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
 }
 
@@ -89,11 +89,16 @@ body {
   font-size: 16px;
   border-radius: 8px;
   min-width: 100px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   color: white;
   outline: none;
   border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .input::placeholder {
   color: #bbbbbb;
+}
+
+.errorInput {
+  border: 1px solid rgb(247, 40, 40);
 }

@@ -1,0 +1,84 @@
+.leaderboard {
+  font-family: "BoyarskyMon", Courier, monospace;
+  height: 500px;
+  overflow-y: auto;
+}
+.one {
+  color: gold !important;
+}
+.two {
+  color: silver !important;
+}
+.three {
+  color: rgb(124, 58, 32) !important;
+}
+.other {
+  color: #35a7d4 !important;
+}
+.one,
+.two,
+.three,
+.other {
+  position: relative;
+}
+
+.one .hashtag {
+  text-shadow: 2px 2px rgb(95, 92, 47);
+}
+
+.two .hashtag {
+  text-shadow: 2px 2px rgb(105, 105, 105);
+}
+
+.three .hashtag {
+  text-shadow: 2px 2px rgb(82, 21, 21);
+}
+
+.other .hashtag {
+  text-shadow: 2px 2px rgb(20, 56, 85);
+}
+
+.hashtag {
+  top: 4px;
+  left: 22px;
+  font-size: 28px;
+  position: absolute;
+  color: white;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 32px;
+}
+
+.name {
+  margin-left: 16px;
+  font-size: 24px;
+  font-family: "ChCooper", Courier, monospace;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.point {
+  font-size: 30px;
+  font-family: "ChCooper", Courier, monospace;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.leaderboard ul {
+  list-style: none;
+  text-decoration: none;
+  margin: 40px;
+  padding: 0;
+}
+.leaderboard li {
+  padding: 4px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
