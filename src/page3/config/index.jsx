@@ -2,7 +2,6 @@ import * as XLSX from "xlsx";
 import "./index.css";
 import FileUploader from "../../file-uploader";
 import Button from "../../button";
-import dayjs from "dayjs";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -16,11 +15,10 @@ const Config3 = () => {
 
   const matchData = (timeData) => {
     const timeDataKeys = Object.keys(timeData[0]);
-    const workerDataKeys = Object.keys(workersData[0]);
     return timeData
       .map((item) => {
         const worker = workersData.find(
-          (wd) => wd[workerDataKeys[5]] === item?.[timeDataKeys[1]]
+          (wd) => wd["ID дугаар"] === item?.[timeDataKeys[1]]
         );
         if (worker) {
           return {
@@ -144,15 +142,14 @@ const Config3 = () => {
           </thead>
           <tbody>
             {userData?.map((item, index) => {
-              const userDataKeys = Object.keys(item);
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item?.[userDataKeys[1]]}</td>
-                  <td>{item?.[userDataKeys[6]]}</td>
-                  <td>{item?.[userDataKeys[8]]}</td>
-                  <td>{item?.[userDataKeys[10]]}</td>
-                  <td>{item?.[userDataKeys[2]]}</td>
+                  <td>{item?.["ID дугаар"]}</td>
+                  <td>{item?.["Алба/Салбар"]}</td>
+                  <td>{item?.[" Нэр"]}</td>
+                  <td>{item?.["Ширээний дугаар"]}</td>
+                  <td>{item?.["Time"]}</td>
                 </tr>
               );
             })}

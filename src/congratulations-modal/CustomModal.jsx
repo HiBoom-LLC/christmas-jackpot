@@ -28,10 +28,6 @@ const customStyles = {
 
 // eslint-disable-next-line react/prop-types
 const CustomModal = ({ show, onHide, title, data = null, gameKey }) => {
-  const dataKeys =
-    gameKey === "game1" && data !== null ? Object.keys(data) : [];
-
-  console.log(dataKeys);
   return (
     <div>
       {show && (
@@ -100,18 +96,18 @@ const CustomModal = ({ show, onHide, title, data = null, gameKey }) => {
                 />
               </div>
               <div className="winnerBox">
-                <div className="lucky-number">{data?.[dataKeys[9]]}</div>
+                <div className="lucky-number">{data?.[" Нэр"]}</div>
                 <div className="lucky-info">
                   <span>ID:</span>
-                  <span>{data?.[dataKeys[1]]}</span>
+                  <span>{data?.["ID дугаар"]}</span>
                 </div>
                 <div className="lucky-info">
                   <span>Салбар:</span>
-                  <span>{data?.[dataKeys[6]]}</span>
+                  <span>{data?.["Алба/Салбар"]}</span>
                 </div>
                 <div className="lucky-info">
                   <span>Ширээ:</span>
-                  <span>{data?.[dataKeys[10]]}</span>
+                  <span>{data?.["Ширээний дугаар"]}</span>
                 </div>
               </div>
             </>

@@ -54,8 +54,6 @@ const Jackpot = () => {
     }, 1000);
   };
 
-  const dataKeys =
-    state.usersData.length > 0 ? Object.keys(state.usersData[0]) : [];
   return (
     <div
       style={{
@@ -105,7 +103,7 @@ const Jackpot = () => {
                 {state.usersData.map((item, index) => {
                   return (
                     <div key={`slot_${index}`} className="slotItem">
-                      {`${item?.[dataKeys[1]]}`}
+                      {`${item?.["ID дугаар"]}`}
                     </div>
                   );
                 })}
