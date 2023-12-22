@@ -38,7 +38,7 @@ const FileUploader = ({ onChange = () => {} }) => {
         {selectedFile ? (
           <div className="fileInfoWrapper">
             <div className="fileInfo">
-              <SiMicrosoftexcel color="white" size={48} />
+              <SiMicrosoftexcel color="white" size={36} />
               <p>{selectedFile.name}</p>
             </div>
             <Button
@@ -51,7 +51,7 @@ const FileUploader = ({ onChange = () => {} }) => {
           </div>
         ) : (
           <>
-            <SiMicrosoftexcel color="white" size={64} />
+            <SiMicrosoftexcel color="white" size={48} />
             <p
               style={{
                 marginBottom: 5,

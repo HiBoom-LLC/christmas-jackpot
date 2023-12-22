@@ -1,0 +1,77 @@
+
+.slotWrapper {
+  border-radius: 8px;
+}
+.slotPicker {
+  background-color: white;
+  position: "relative";
+  margin-top: 94px;
+  height: 259px;
+  width: 385px;
+}
+.slotItem {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: black;
+  font-size: 50px;
+  text-align: center;
+  font-family: "BoyarskyMon";
+  font-weight: bold;
+  padding: 8px 50px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.top-shadow {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-shadow: inset 0 70px 40px -15px rgba(42, 39, 39, 0.7);
+  z-index: 10;
+}
+
+.bottom-shadow {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-shadow: inset 0 -70px 50px -15px rgba(42, 39, 39, 0.7);
+  z-index: 10;
+}
+
+.top-shadow,
+.bottom-shadow,
+.slotPicker {
+  border-radius: 32px;
+}
+
+.my-spinner {
+  position: relative;
+  border-radius: 50px;
+  margin-right: 24px;
+}
+
+.jackpotMachine {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.jackpot {
+  position: absolute;
+  top: 0;
+  height: 500px;
+  width: 100%;
+}
+
+.totalTitle {
+  margin: 0;
+  margin-top: 40px;
+  margin-right: 25px;
+  text-align: center;
+  color: white;
+  font-size: 48px;
+  font-family: "BoyarskyMon", Courier, monospace;
+  text-shadow: 2px 2px #333;
+}

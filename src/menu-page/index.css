@@ -26,17 +26,15 @@
 }
 
 .button {
-  /* height: 100px;
-    width: 100px; */
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   background-color: white;
-  padding: 16px;
+  padding: 32px;
   border-radius: 20px;
   margin: 10px;
   outline: none;
   border: none;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   transition: all 0.2s ease;
 }
 .button:hover {
@@ -48,7 +46,7 @@
   margin-left: 30px;
 }
 .button h5 {
-  font-size: 14px;
+  font-size: 20px;
   text-align: left;
   font-family: "ChCooper", Courier, monospace;
   margin: 0;
@@ -57,7 +55,7 @@
 }
 .button p {
   width: 170px;
-  font-size: 12px;
+  font-size: 16px;
   text-align: left;
   margin: 0;
   margin-top: 4px;

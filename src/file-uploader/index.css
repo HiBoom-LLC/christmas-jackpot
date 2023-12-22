@@ -1,15 +1,12 @@
 .fileUploader {
-  padding: 8px 16px;
   border-radius: 8px;
   border: 2px dashed white;
   outline: none;
   display: flex;
-  padding: 20px 40px;
+  padding: 10px 40px;
   color: white;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  /* background-color: white; */
   cursor: pointer;
 }
 

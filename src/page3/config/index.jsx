@@ -9,10 +9,9 @@ import { useNavigate } from "react-router-dom";
 import workersData from "../../assets/workers202312221712.json";
 
 // eslint-disable-next-line react/prop-types
-const Config = () => {
-  const [timeString, setTimeString] = useState("");
+const Config3 = () => {
   const [userData, setUserData] = useState([]);
-  const [excelData, setExcelData] = useState([]);
+  const [gift, setGift] = useState("");
   const navigate = useNavigate();
 
   const matchData = (timeData) => {
@@ -77,7 +76,6 @@ const Config = () => {
           return -1;
         });
         const matchedData = matchData(sortedData);
-        setExcelData(matchedData);
         setUserData(matchedData);
       }
     };
@@ -89,23 +87,19 @@ const Config = () => {
       return;
     }
 
-    if (!timeString) {
-      toast.warn("Ирсэн цаг оруулна уу.");
-      return;
-    }
-    if (!dayjs(timeString, "YYYY-MM-DD HH:mm:ss", false).isValid()) {
-      toast.warn("Ирсэн цагийн формат буруу байна.");
+    if (!gift) {
+      toast.warn("Шагналын нэр оруулна уу.");
       return;
     }
 
     localStorage.setItem(
-      "game1",
+      "game3",
       JSON.stringify({
         usersData: userData,
-        time: timeString,
+        gift,
       })
     );
-    navigate("/game1/jackpot");
+    navigate("/game3/jackpot");
   };
 
   return (
@@ -121,28 +115,22 @@ const Config = () => {
       </div>
 
       <div className="formGroup">
-        <label>Ирсэн цаг</label>
+        <label>Шагналын нэр</label>
         <input
           className="input"
-          placeholder="2023-12-31 00:00:00"
-          value={timeString}
+          placeholder="Шагналын нэр оруулна уу"
+          value={gift}
           onChange={(e) => {
-            setTimeString(e.target.value);
-            if (e.target.value.length > 12) {
-              const date = dayjs(e.target.value);
-
-              const timeDataKeys = Object.keys(excelData[0]);
-              setUserData(
-                excelData.filter((item) => {
-                  const date2 = dayjs(item?.[timeDataKeys[2]]);
-                  return date2.diff(date) < 0;
-                })
-              );
-            }
+            setGift(e.target.value);
           }}
         />
       </div>
-      <div className="tableWrapper">
+      <div
+        className="tableWrapper"
+        style={{
+          marginTop: 32,
+        }}
+      >
         <table className="table">
           <thead>
             <tr>
@@ -171,6 +159,7 @@ const Config = () => {
           </tbody>
         </table>
       </div>
+
       <div className="d-flex justify-content-between align-items-center">
         <div className="total">Нийт орологч: {userData.length}</div>
         <Button
@@ -188,4 +177,4 @@ const Config = () => {
   );
 };
 
-export default Config;
+export default Config3;

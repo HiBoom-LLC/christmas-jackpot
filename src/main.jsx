@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./global.css";
-import MainContextProvider from "./mainContext.jsx";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./layout/index.jsx";
 import Page3 from "./page3/index.jsx";
@@ -10,6 +9,8 @@ import Jackpot from "./page1/jackpot/index.jsx";
 import Config from "./page1/config/index.jsx";
 import ConfigGame2 from "./page2/config/index.jsx";
 import Game from "./page2/game/index.jsx";
+import Jackpot3 from "./page3/jackpot/index.jsx";
+import Config3 from "./page3/config/index.jsx";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -57,18 +58,27 @@ export const Router = () => {
       path: "game3",
       element: (
         <Layout>
-          <Page3 />
+          <Outlet />
         </Layout>
       ),
+      children: [
+        {
+          path: "config",
+          element: <Config3 />,
+        },
+        {
+          path: "jackpot",
+          element: <Jackpot3 />,
+        },
+      ],
     },
   ]);
 
   return <RouterProvider router={router} />;
 };
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MainContextProvider>
-      <Router />
-    </MainContextProvider>
+    <Router />
   </React.StrictMode>
 );
