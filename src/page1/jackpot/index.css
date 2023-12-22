@@ -64,3 +64,12 @@
   height: 500px;
   width: 100%;
 }
+
+.totalTitle {
+  margin: 0;
+  margin-right: 25px;
+  text-align: center;
+  color: white;
+  font-size: 48px;
+  font-family: "BoyarskyMon", Courier, monospace;
+}

@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import workersData from "../../assets/workers202312221712.json";
 
 // eslint-disable-next-line react/prop-types
 const Config = () => {
@@ -13,6 +14,26 @@ const Config = () => {
   const [userData, setUserData] = useState([]);
   const [excelData, setExcelData] = useState([]);
   const navigate = useNavigate();
+
+  const matchData = (timeData) => {
+    const timeDataKeys = Object.keys(timeData[0]);
+    const workerDataKeys = Object.keys(workersData[0]);
+    return timeData
+      .map((item) => {
+        const worker = workersData.find(
+          (wd) => wd[workerDataKeys[5]] === item?.[timeDataKeys[1]]
+        );
+        if (worker) {
+          return {
+            ...item,
+            ...worker,
+          };
+        } else {
+          return null;
+        }
+      })
+      .filter((it) => it !== null);
+  };
 
   const fileUpload = (file) => {
     if (!file) {
@@ -28,36 +49,36 @@ const Config = () => {
         const worksheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[worksheetName];
         const data = XLSX.utils.sheet_to_json(worksheet);
-        let sortedData = data
-          .filter((rowData) => rowData.__rowNum__ > 8)
-          .sort((a, b) => {
-            if (a.__EMPTY_1 > b.__EMPTY_1) {
-              return 1;
-            }
-            return -1;
-          });
+        const timeDataKeys = Object.keys(data[0]);
+        let sortedData = data.sort((a, b) => {
+          if (a?.[timeDataKeys[2]] > b?.[timeDataKeys[2]]) {
+            return 1;
+          }
+          return -1;
+        });
 
         let groupData = {};
         sortedData.map((item) => {
-          if (!groupData.hasOwnProperty(item.__EMPTY)) {
-            groupData[item.__EMPTY] = sortedData.filter(
-              (it) => it.__EMPTY === item.__EMPTY
+          if (!groupData.hasOwnProperty(item?.[timeDataKeys[1]])) {
+            groupData[item?.[timeDataKeys[1]]] = sortedData.filter(
+              (it) => it?.[timeDataKeys[1]] === item?.[timeDataKeys[1]]
             );
           }
         });
-        
+
         const uniqueData = Object.keys(groupData).map((key) => {
           return groupData[key][0];
         });
 
         sortedData = uniqueData.sort((a, b) => {
-          if (a.__EMPTY_1 > b.__EMPTY_1) {
+          if (a?.[timeDataKeys[2]] > b?.[timeDataKeys[2]]) {
             return 1;
           }
           return -1;
         });
-        setExcelData(sortedData);
-        setUserData(sortedData);
+        const matchedData = matchData(sortedData);
+        setExcelData(matchedData);
+        setUserData(matchedData);
       }
     };
   };
@@ -77,7 +98,6 @@ const Config = () => {
       return;
     }
 
-    toast.success("Амжилттай");
     localStorage.setItem(
       "game1",
       JSON.stringify({
@@ -111,9 +131,10 @@ const Config = () => {
             if (e.target.value.length > 12) {
               const date = dayjs(e.target.value);
 
+              const timeDataKeys = Object.keys(excelData[0]);
               setUserData(
                 excelData.filter((item) => {
-                  const date2 = dayjs(item.__EMPTY_1);
+                  const date2 = dayjs(item?.[timeDataKeys[2]]);
                   return date2.diff(date) < 0;
                 })
               );
@@ -126,17 +147,24 @@ const Config = () => {
           <thead>
             <tr>
               <th>№</th>
-              <th>Ажилтны код</th>
+              <th>ID</th>
+              <th>Алба/Салбар</th>
+              <th>Нэр</th>
+              <th>Ширээ</th>
               <th>Ирсэн цаг</th>
             </tr>
           </thead>
           <tbody>
             {userData?.map((item, index) => {
+              const userDataKeys = Object.keys(item);
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item.__EMPTY}</td>
-                  <td>{item.__EMPTY_1}</td>
+                  <td>{item?.[userDataKeys[1]]}</td>
+                  <td>{item?.[userDataKeys[6]]}</td>
+                  <td>{item?.[userDataKeys[8]]}</td>
+                  <td>{item?.[userDataKeys[10]]}</td>
+                  <td>{item?.[userDataKeys[2]]}</td>
                 </tr>
               );
             })}

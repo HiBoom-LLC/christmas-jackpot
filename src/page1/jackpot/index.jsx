@@ -10,7 +10,6 @@ const Jackpot = () => {
   const [loadingMain, setLoadingMain] = useState(true);
   const [state, setState] = useState({
     usersData: [],
-    ready: false,
   });
   const lottieRef = useRef(null);
   const [randomNumber, setRandomNumber] = useState(0);
@@ -55,6 +54,8 @@ const Jackpot = () => {
     }, 1000);
   };
 
+  const dataKeys =
+    state.usersData.length > 0 ? Object.keys(state.usersData[0]) : [];
   return (
     <div
       style={{
@@ -67,8 +68,8 @@ const Jackpot = () => {
     >
       <CustomModal
         show={showModal}
-        title="Азтан код"
-        data={winner?.__EMPTY || ""}
+        title="Азтан"
+        data={winner}
         onHide={() => setShowModal(false)}
         gameKey="game1"
       />
@@ -77,6 +78,7 @@ const Jackpot = () => {
           padding: "0 120px",
         }}
       >
+        <h1 className="totalTitle">Нийт орологч: {state.usersData.length}</h1>
         <div className="jackpotMachine">
           <div className="jackpot">
             <Lottie
@@ -103,7 +105,7 @@ const Jackpot = () => {
                 {state.usersData.map((item, index) => {
                   return (
                     <div key={`slot_${index}`} className="slotItem">
-                      {item.__EMPTY}
+                      {`${item?.[dataKeys[1]]}`}
                     </div>
                   );
                 })}

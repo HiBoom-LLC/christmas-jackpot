@@ -27,7 +27,11 @@ const customStyles = {
 };
 
 // eslint-disable-next-line react/prop-types
-const CustomModal = ({ show, onHide, title, data, gameKey }) => {
+const CustomModal = ({ show, onHide, title, data = null, gameKey }) => {
+  const dataKeys =
+    gameKey === "game1" && data !== null ? Object.keys(data) : [];
+
+  console.log(dataKeys);
   return (
     <div>
       {show && (
@@ -95,7 +99,21 @@ const CustomModal = ({ show, onHide, title, data, gameKey }) => {
                   loop={true}
                 />
               </div>
-              <div className="lucky-number">{data}</div>
+              <div className="winnerBox">
+                <div className="lucky-number">{data?.[dataKeys[9]]}</div>
+                <div className="lucky-info">
+                  <span>ID:</span>
+                  <span>{data?.[dataKeys[1]]}</span>
+                </div>
+                <div className="lucky-info">
+                  <span>Салбар:</span>
+                  <span>{data?.[dataKeys[6]]}</span>
+                </div>
+                <div className="lucky-info">
+                  <span>Ширээ:</span>
+                  <span>{data?.[dataKeys[10]]}</span>
+                </div>
+              </div>
             </>
           ) : (
             <Leaderboard data={data} />
