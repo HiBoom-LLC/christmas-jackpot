@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./index.css";
 import GameButton from "../../game-button";
 import CustomModal from "../../congratulations-modal/CustomModal";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { FaUserCircle } from "react-icons/fa";
+import { MainContext } from "../../mainContext";
 
 const Game = () => {
   const [loadingMain, setLoadingMain] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [result, setResult] = useState();
-
+  const { formData } = useContext(MainContext);
+  console.log(formData);
   const { control, reset, handleSubmit } = useForm();
 
   const { fields, append } = useFieldArray({
@@ -22,7 +25,6 @@ const Game = () => {
       setResult({});
       const game2Json = localStorage.getItem("game2");
       const game2Data = JSON.parse(game2Json);
-
       const headerRow = {};
       Array(game2Data.judgeCount)
         .fill(null)
@@ -158,29 +160,50 @@ const Game = () => {
                       if (colIndex === 0) {
                         return (
                           <td key={`bodyCell_${colIndex}`}>
-                            <Controller
-                              name={`player.${index}.${colKey}`}
-                              control={control}
-                              rules={{
-                                required: "Талбар хоосон байна.",
-                              }}
-                              render={({ field, fieldState }) => (
-                                <input
-                                  {...field}
-                                  onChange={(e) => {
-                                    field.onChange(e.target.value);
-                                  }}
-                                  className={`input ${
-                                    fieldState.error ? "errorInput" : ""
-                                  }`}
-                                  placeholder="Оролцогчын нэр"
-                                  type="text"
-                                  style={{
-                                    width: "calc(100% - 32px)",
-                                  }}
-                                />
-                              )}
-                            />
+                            <div className="d-flex align-items-center">
+                              <div
+                                style={{
+                                  marginRight: 16,
+                                }}
+                              >
+                                {formData?.image &&
+                                formData?.image.length > 0 &&
+                                formData.image[index - 1]?.src ? (
+                                  <img
+                                    src={URL.createObjectURL(
+                                      formData.image[index - 1].src
+                                    )}
+                                    alt="img"
+                                    className="upImg2"
+                                  />
+                                ) : (
+                                  <FaUserCircle className="img2" />
+                                )}
+                              </div>
+                              <Controller
+                                name={`player.${index}.${colKey}`}
+                                control={control}
+                                rules={{
+                                  required: "Талбар хоосон байна.",
+                                }}
+                                render={({ field, fieldState }) => (
+                                  <input
+                                    {...field}
+                                    onChange={(e) => {
+                                      field.onChange(e.target.value);
+                                    }}
+                                    className={`input ${
+                                      fieldState.error ? "errorInput" : ""
+                                    }`}
+                                    placeholder="Оролцогчын нэр"
+                                    type="text"
+                                    style={{
+                                      width: "calc(100% - 32px)",
+                                    }}
+                                  />
+                                )}
+                              />
+                            </div>
                           </td>
                         );
                       }

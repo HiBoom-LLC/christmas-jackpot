@@ -48,6 +48,17 @@ const Jackpot = () => {
     return null;
   }
 
+  const setLuckyMan = (w) => {
+    const l = localStorage.getItem("luckyMan");
+    if (l) {
+      const arr = JSON.parse(l);
+      arr.push(w);
+      localStorage.setItem("luckyMan", JSON.stringify(arr));
+    } else {
+      localStorage.setItem("luckyMan", JSON.stringify([w]));
+    }
+  };
+
   const onCongratulations = () => {
     setTimeout(() => {
       setShowModal(true);
@@ -97,6 +108,7 @@ const Jackpot = () => {
                   setLoading(false);
                   onCongratulations();
                   setWinner(state.usersData[randomNumber + 1]);
+                  setLuckyMan(state.usersData[randomNumber + 1]);
                 }}
                 className="slotPicker"
               >

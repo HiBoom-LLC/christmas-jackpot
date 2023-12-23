@@ -1,0 +1,38 @@
+.imageButtonWrap {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.imageButton {
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.imageButton:hover {
+  filter: brightness(0.8);
+}
+
+.imageButton:first-child {
+  margin-left: 0;
+}
+
+.imageButton:last-child {
+  margin-right: 0;
+}
+
+.img {
+  margin: 20px;
+  height: 60px;
+  width: 60px;
+}
+
+.upImg {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}

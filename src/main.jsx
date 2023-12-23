@@ -11,6 +11,7 @@ import ConfigGame2 from "./page2/config/index.jsx";
 import Game from "./page2/game/index.jsx";
 import Jackpot3 from "./page3/jackpot/index.jsx";
 import Config3 from "./page3/config/index.jsx";
+import MainContextProvider from "./mainContext.jsx";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -40,7 +41,9 @@ export const Router = () => {
       path: "game2",
       element: (
         <Layout>
-          <Outlet />
+          <MainContextProvider>
+            <Outlet />
+          </MainContextProvider>
         </Layout>
       ),
       children: [

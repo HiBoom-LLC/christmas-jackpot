@@ -71,7 +71,7 @@
 .leaderboard ul {
   list-style: none;
   text-decoration: none;
-  margin: 40px;
+  margin: 20px 40px;
   padding: 0;
 }
 .leaderboard li {
@@ -81,4 +81,18 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.img3 {
+  height: 60px;
+  width: 60px;
+  color: #999;
+  border-radius: 30px;
+}
+
+.upImg3 {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  border-radius: 30px;
 }
