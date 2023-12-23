@@ -5,6 +5,7 @@ import jackbotLottie from "../../assets/jackpot.json";
 import Lottie from "lottie-react";
 import GameButton from "../../game-button";
 import CustomModal from "../../congratulations-modal/CustomModal";
+import { shuffle } from "../../mainContext";
 
 const Jackpot3 = () => {
   const [loadingMain, setLoadingMain] = useState(true);
@@ -22,7 +23,10 @@ const Jackpot3 = () => {
       const game1Json = localStorage.getItem("game3");
       const game1Data = JSON.parse(game1Json);
 
-      setState(game1Data);
+      setState({
+        ...game1Data,
+        usersData: [...shuffle(game1Data.usersData)],
+      });
       setLoadingMain(false);
     } catch (err) {
       setLoadingMain(false);

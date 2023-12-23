@@ -56,17 +56,11 @@ const Config3 = () => {
         const worksheet = workbook.Sheets[worksheetName];
         const data = XLSX.utils.sheet_to_json(worksheet);
         const timeDataKeys = Object.keys(data[0]);
-        let sortedData = data.sort((a, b) => {
-          if (a?.[timeDataKeys[2]] > b?.[timeDataKeys[2]]) {
-            return 1;
-          }
-          return -1;
-        });
 
         let groupData = {};
-        sortedData.map((item) => {
+        data.map((item) => {
           if (!groupData.hasOwnProperty(item?.[timeDataKeys[1]])) {
-            groupData[item?.[timeDataKeys[1]]] = sortedData.filter(
+            groupData[item?.[timeDataKeys[1]]] = data.filter(
               (it) => it?.[timeDataKeys[1]] === item?.[timeDataKeys[1]]
             );
           }
@@ -76,13 +70,7 @@ const Config3 = () => {
           return groupData[key][0];
         });
 
-        sortedData = uniqueData.sort((a, b) => {
-          if (a?.[timeDataKeys[2]] > b?.[timeDataKeys[2]]) {
-            return 1;
-          }
-          return -1;
-        });
-        const matchedData = matchData(sortedData);
+        const matchedData = matchData(uniqueData);
         luckyMan.map((lm) => {
           let rmi = matchedData.findIndex(
             (item) => item?.["ID дугаар"] === lm?.["ID дугаар"]
