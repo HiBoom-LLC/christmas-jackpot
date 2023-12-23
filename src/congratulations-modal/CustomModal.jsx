@@ -1,6 +1,6 @@
 import "./CustomModal.css";
 import Modal from "react-modal";
-import React from "react";
+import React, { useEffect } from "react";
 import championJson from "../../src/assets/champion.json";
 import fireworkJson from "../../src/assets/champion-firework.json";
 import Lottie from "lottie-react";
@@ -28,6 +28,7 @@ const customStyles = {
 
 // eslint-disable-next-line react/prop-types
 const CustomModal = ({ show, onHide, title, data = null, gameKey }) => {
+
   return (
     <div>
       {show && (

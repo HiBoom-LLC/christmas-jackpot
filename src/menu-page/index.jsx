@@ -3,6 +3,8 @@ import box2Image from "/box2.png";
 import danceImage from "/dance.png";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
+import { MdRemove } from "react-icons/md";
+
 // eslint-disable-next-line react/prop-types
 const MenuPage = () => {
   const navigate = useNavigate();
@@ -75,6 +77,19 @@ const MenuPage = () => {
           <p>Олон олон нууцлаг бэлгийн азтан</p>
         </button>
       </div>
+      <MdRemove
+        onClick={() => {
+          localStorage.clear();
+        }}
+        color={"#eeeeee"}
+        size={24}
+        style={{
+          cursor: "pointer",
+          position: "absolute",
+          bottom: 4,
+          right: 16,
+        }}
+      />
     </>
   );
 };

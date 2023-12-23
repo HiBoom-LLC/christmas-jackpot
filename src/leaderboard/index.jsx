@@ -7,88 +7,144 @@ import { FaUserCircle } from "react-icons/fa";
 // eslint-disable-next-line react/prop-types
 const Leaderboard = ({ data }) => {
   const { formData } = useContext(MainContext);
-  const orderedData = Object.keys(data)
+
+  let orderedData = Object.keys(data)
     .map((name, index) => {
       return {
         name,
-        point: data[name],
+        point: Number(data[name]),
         img: formData?.image[index]?.src,
       };
     })
     .sort((a, b) => b.point - a.point);
+
+  const grouped = orderedData.reduce((result, currentValue) => {
+    (result[currentValue["point"]] = result[currentValue["point"]] || []).push(
+      currentValue
+    );
+    return result;
+  }, {});
+
+  orderedData = Object.keys(grouped)
+    .map((point) => {
+      return {
+        point,
+        list: grouped[point],
+      };
+    })
+    .sort((a, b) => b.point - a.point);
+
   return (
     <div className="leaderboard">
       <ul>
         {orderedData.map((item, index) => {
           if (index === 0) {
-            return (
-              <li key={index}>
-                <div className="group">
-                  <div className="one">
-                    <GiTrophy size={60} />
-                    <span className="hashtag">{index + 1}</span>
-                  </div>
-                  <div className="name d-flex align-items-center">
-                    <div
-                      style={{
-                        marginRight: 16,
-                        marginTop: 10,
-                      }}
-                    >
-                      {item.img ? (
-                        <img
-                          src={URL.createObjectURL(item.img)}
-                          alt="img"
-                          className="upImg3"
-                        />
-                      ) : (
-                        <FaUserCircle className="img3" />
-                      )}
+            return item.list.map((listItem, itemIndex) => {
+              return (
+                <li key={`${index}_${itemIndex}`}>
+                  <div className="group">
+                    <div className="one">
+                      <GiTrophy size={60} />
+                      <span className="hashtag">{index + 1}</span>
                     </div>
-                    {item.name}
+                    <div className="name d-flex align-items-center">
+                      <div
+                        style={{
+                          marginRight: 16,
+                          marginTop: 10,
+                        }}
+                      >
+                        {listItem.img ? (
+                          <img
+                            src={URL.createObjectURL(listItem.img)}
+                            alt="img"
+                            className="upImg3"
+                          />
+                        ) : (
+                          <FaUserCircle className="img3" />
+                        )}
+                      </div>
+                      {listItem.name}
+                    </div>
                   </div>
-                </div>
-                <div className="point one">{item.point}</div>
-              </li>
-            );
+                  <div className="point one">{listItem.point}</div>
+                </li>
+              );
+            });
           }
           if (index === 1) {
-            return (
-              <li key={index}>
-                <div className="group">
-                  <div className="two">
-                    <GiTrophy size={60} />
-                    <span className="hashtag">{index + 1}</span>
-                  </div>
-                  <div className="name d-flex align-items-center">
-                    <div
-                      style={{
-                        marginRight: 16,
-                        marginTop: 10,
-                      }}
-                    >
-                      {item.img ? (
-                        <img
-                          src={URL.createObjectURL(item.img)}
-                          alt="img"
-                          className="upImg3"
-                        />
-                      ) : (
-                        <FaUserCircle className="img3" />
-                      )}
+            return item.list.map((listItem, itemIndex) => {
+              return (
+                <li key={`${index}_${itemIndex}`}>
+                  <div className="group">
+                    <div className="two">
+                      <GiTrophy size={60} />
+                      <span className="hashtag">{index + 1}</span>
                     </div>
-                    {item.name}
+                    <div className="name d-flex align-items-center">
+                      <div
+                        style={{
+                          marginRight: 16,
+                          marginTop: 10,
+                        }}
+                      >
+                        {listItem.img ? (
+                          <img
+                            src={URL.createObjectURL(listItem.img)}
+                            alt="img"
+                            className="upImg3"
+                          />
+                        ) : (
+                          <FaUserCircle className="img3" />
+                        )}
+                      </div>
+                      {listItem.name}
+                    </div>
                   </div>
-                </div>
-                <div className="point two">{item.point}</div>
-              </li>
-            );
+                  <div className="point two">{listItem.point}</div>
+                </li>
+              );
+            });
           }
           if (index === 2) {
+            return item.list.map((listItem, itemIndex) => {
+              return (
+                <li key={`${index}_${itemIndex}`}>
+                  <div className="group">
+                    <div className="three">
+                      <GiTrophy size={60} />
+                      <span className="hashtag">{index + 1}</span>
+                    </div>
+                    <div className="name d-flex align-items-center">
+                      <div
+                        style={{
+                          marginRight: 16,
+                          marginTop: 10,
+                        }}
+                      >
+                        {listItem.img ? (
+                          <img
+                            src={URL.createObjectURL(listItem.img)}
+                            alt="img"
+                            className="upImg3"
+                          />
+                        ) : (
+                          <FaUserCircle className="img3" />
+                        )}
+                      </div>
+                      {listItem.name}
+                    </div>
+                  </div>
+                  <div className="point three">{listItem.point}</div>
+                </li>
+              );
+            });
+          }
+          return item.list.map((listItem, itemIndex) => {
             return (
-              <li key={index}>
+              <li key={`${index}_${itemIndex}`}>
                 <div className="group">
-                  <div className="three">
+                  <div className="other">
                     <GiTrophy size={60} />
                     <span className="hashtag">{index + 1}</span>
                   </div>
@@ -99,9 +155,9 @@ const Leaderboard = ({ data }) => {
                         marginTop: 10,
                       }}
                     >
-                      {item.img ? (
+                      {listItem.img ? (
                         <img
-                          src={URL.createObjectURL(item.img)}
+                          src={URL.createObjectURL(listItem.img)}
                           alt="img"
                           className="upImg3"
                         />
@@ -109,43 +165,13 @@ const Leaderboard = ({ data }) => {
                         <FaUserCircle className="img3" />
                       )}
                     </div>
-                    {item.name}
+                    {listItem.name}
                   </div>
                 </div>
-                <div className="point three">{item.point}</div>
+                <div className="point other">{listItem.point}</div>
               </li>
             );
-          }
-          return (
-            <li key={index}>
-              <div className="group">
-                <div className="other">
-                  <GiTrophy size={60} />
-                  <span className="hashtag">{index + 1}</span>
-                </div>
-                <div className="name d-flex align-items-center">
-                  <div
-                    style={{
-                      marginRight: 16,
-                      marginTop: 10,
-                    }}
-                  >
-                    {item.img ? (
-                      <img
-                        src={URL.createObjectURL(item.img)}
-                        alt="img"
-                        className="upImg3"
-                      />
-                    ) : (
-                      <FaUserCircle className="img3" />
-                    )}
-                  </div>
-                  {item.name}
-                </div>
-              </div>
-              <div className="point other">{item.point}</div>
-            </li>
-          );
+          });
         })}
       </ul>
     </div>

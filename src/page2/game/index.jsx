@@ -8,10 +8,10 @@ import { MainContext } from "../../mainContext";
 
 const Game = () => {
   const [loadingMain, setLoadingMain] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [result, setResult] = useState();
   const { formData } = useContext(MainContext);
-  console.log(formData);
   const { control, reset, handleSubmit } = useForm();
 
   const { fields, append } = useFieldArray({
@@ -70,7 +70,13 @@ const Game = () => {
       }
     });
     setResult(_result);
-    setShowModal(true);
+    setLoading(true);
+    setTimeout(() => {
+      setShowModal(true);
+      const audio = new Audio("/congrats.mp3");
+      audio.play();
+      setLoading(false);
+    }, 1000);
   };
 
   if (loadingMain) {
@@ -249,11 +255,13 @@ const Game = () => {
         >
           <GameButton
             type="submit"
+            loading={loading}
             style={{
               fontSize: 24,
               height: 74,
               width: 300,
             }}
+            laodingMt={0}
           >
             Ялагч тодруулах
           </GameButton>

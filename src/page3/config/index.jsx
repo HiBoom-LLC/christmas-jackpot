@@ -2,7 +2,7 @@ import * as XLSX from "xlsx";
 import "./index.css";
 import FileUploader from "../../file-uploader";
 import Button from "../../button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import workersData from "../../assets/workers202312221712.json";
@@ -12,6 +12,15 @@ const Config3 = () => {
   const [userData, setUserData] = useState([]);
   const [gift, setGift] = useState("");
   const navigate = useNavigate();
+  const [luckyMan, setLuckyMan] = useState([]);
+
+  useEffect(() => {
+    const l = localStorage.getItem("luckyMan");
+    if (l) {
+      const arr = JSON.parse(l);
+      setLuckyMan(arr);
+    }
+  }, []);
 
   const matchData = (timeData) => {
     const timeDataKeys = Object.keys(timeData[0]);
@@ -74,6 +83,14 @@ const Config3 = () => {
           return -1;
         });
         const matchedData = matchData(sortedData);
+        luckyMan.map((lm) => {
+          let rmi = matchedData.findIndex(
+            (item) => item?.["ID дугаар"] === lm?.["ID дугаар"]
+          );
+          if (rmi > -1) {
+            matchedData.splice(rmi, 1);
+          }
+        });
         setUserData(matchedData);
       }
     };

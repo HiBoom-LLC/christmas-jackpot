@@ -36,12 +36,20 @@ const Jackpot = () => {
   }
 
   const startSpin = () => {
+    let audio = new Audio("/spin.mp3");
+    audio.play();
     setWinner(null);
     setLoading(true);
     const num = getRandomInt(1, state.usersData.length);
-    setRandomNumber(num);
-    lottieRef.current.stop();
-    lottieRef.current.play();
+
+    setTimeout(() => {
+      lottieRef.current.stop();
+      lottieRef.current.play();
+    }, 300);
+
+    setTimeout(() => {
+      setRandomNumber(num);
+    }, 1450);
   };
 
   if (loadingMain) {
@@ -62,6 +70,8 @@ const Jackpot = () => {
   const onCongratulations = () => {
     setTimeout(() => {
       setShowModal(true);
+      const audio = new Audio("/congrats.mp3");
+      audio.play();
     }, 1000);
   };
 
@@ -79,7 +89,10 @@ const Jackpot = () => {
         show={showModal}
         title="Азтан"
         data={winner}
-        onHide={() => setShowModal(false)}
+        onHide={() => {
+          setShowModal(false);
+          window.location.reload();
+        }}
         gameKey="game1"
       />
       <div
@@ -102,13 +115,26 @@ const Jackpot = () => {
               <div className="top-shadow"></div>
               <Slot
                 target={randomNumber}
-                duration={5000}
+                duration={14150}
                 times={2}
                 onEnd={() => {
                   setLoading(false);
                   onCongratulations();
-                  setWinner(state.usersData[randomNumber + 1]);
-                  setLuckyMan(state.usersData[randomNumber + 1]);
+                  const winnerIndex = randomNumber + 1;
+                  const winner = { ...state.usersData[winnerIndex] };
+                  setWinner(winner);
+                  setLuckyMan(winner);
+                  setTimeout(() => {
+                    setState((prev) => {
+                      prev.usersData.splice(winnerIndex, 1);
+                      const newState = {
+                        ...prev,
+                        usersData: [...prev.usersData],
+                      };
+                      localStorage.setItem("game1", JSON.stringify(newState));
+                      return newState;
+                    });
+                  }, 2000);
                 }}
                 className="slotPicker"
               >

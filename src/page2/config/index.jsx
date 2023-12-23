@@ -109,7 +109,6 @@ const ConfigGame2 = () => {
                   name={`image.${index}.src`}
                   control={control}
                   render={({ field }) => {
-                    console.log(field.value)
                     return (
                       <>
                         <input
