@@ -2,7 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./global.css";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  BrowserRouter,
+  Outlet,
+  Route,
+  RouterProvider,
+  Routes,
+  createBrowserRouter,
+} from "react-router-dom";
 import Layout from "./layout/index.jsx";
 import Jackpot from "./page1/jackpot/index.jsx";
 import Config from "./page1/config/index.jsx";
@@ -76,7 +83,16 @@ export const Router = () => {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  // return <RouterProvider router={router} />;
+  return (
+    <BrowserRouter basename="/">
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/game1/config" element={<Layout><Config /></Layout>} />
+        <Route path="/game1/jackpot" element={<Layout><Jackpot /></Layout>} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
