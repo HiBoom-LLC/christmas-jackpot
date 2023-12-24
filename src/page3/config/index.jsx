@@ -87,7 +87,7 @@ const Config3 = () => {
   };
 
   const configDone = () => {
-    if (!userData || userData?.length <= 0) {
+    if (!mainData || mainData?.length <= 0) {
       toast.warn("Оролцогчдийн бүртгэл файл оруулна уу.");
       return;
     }
@@ -100,7 +100,7 @@ const Config3 = () => {
     localStorage.setItem(
       "game3",
       JSON.stringify({
-        usersData: userData,
+        usersData: mainData,
         gift,
       })
     );
