@@ -4,7 +4,6 @@ import App from "./App.jsx";
 import "./global.css";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./layout/index.jsx";
-import Page3 from "./page3/index.jsx";
 import Jackpot from "./page1/jackpot/index.jsx";
 import Config from "./page1/config/index.jsx";
 import ConfigGame2 from "./page2/config/index.jsx";
@@ -20,7 +19,7 @@ export const Router = () => {
       element: <App />,
     },
     {
-      path: "game1",
+      path: "/game1",
       element: (
         <Layout>
           <Outlet />
@@ -38,7 +37,7 @@ export const Router = () => {
       ],
     },
     {
-      path: "game2",
+      path: "/game2",
       element: (
         <Layout>
           <MainContextProvider>
@@ -58,7 +57,7 @@ export const Router = () => {
       ],
     },
     {
-      path: "game3",
+      path: "/game3",
       element: (
         <Layout>
           <Outlet />
