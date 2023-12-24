@@ -111,7 +111,7 @@ const Jackpot3 = () => {
         data={winner}
         onHide={() => {
           setShowModal(false);
-          navigate("/");
+          navigate("/game3/jackpot");
         }}
         gameKey="game1"
       />
