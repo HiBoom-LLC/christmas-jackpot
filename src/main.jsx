@@ -26,7 +26,7 @@ export const Router = () => {
       element: <App />,
     },
     {
-      path: "/game1",
+      path: "game1",
       element: (
         <Layout>
           <Outlet />
@@ -44,7 +44,7 @@ export const Router = () => {
       ],
     },
     {
-      path: "/game2",
+      path: "game2",
       element: (
         <Layout>
           <MainContextProvider>
@@ -64,7 +64,7 @@ export const Router = () => {
       ],
     },
     {
-      path: "/game3",
+      path: "game3",
       element: (
         <Layout>
           <Outlet />
@@ -83,16 +83,16 @@ export const Router = () => {
     },
   ]);
 
-  // return <RouterProvider router={router} />;
-  return (
-    <BrowserRouter basename="/">
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/game1/config" element={<Layout><Config /></Layout>} />
-        <Route path="/game1/jackpot" element={<Layout><Jackpot /></Layout>} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
+  // return (
+  //   <BrowserRouter basename="/">
+  //     <Routes>
+  //       <Route path="/" element={<App />} />
+  //       <Route path="/game1/config" element={<Layout><Config /></Layout>} />
+  //       <Route path="/game1/jackpot" element={<Layout><Jackpot /></Layout>} />
+  //     </Routes>
+  //   </BrowserRouter>
+  // );
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(

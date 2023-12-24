@@ -125,6 +125,10 @@ const Config = () => {
     navigate("/game1/jackpot");
   };
 
+  const search = (code) => {
+    setUserData(excelData.filter((item) => item?.["ID дугаар"].startsWith(code) ));
+  };
+
   return (
     <div className="backgroundWrapper">
       <div
@@ -164,7 +168,15 @@ const Config = () => {
           <thead>
             <tr>
               <th>№</th>
-              <th>ID</th>
+              <th>
+                <div className="d-flex">
+                  ID{" "}
+                  <input
+                    className="search"
+                    onChange={(e) => search(e.target.value)}
+                  />
+                </div>
+              </th>
               <th>Алба/Салбар</th>
               <th>Нэр</th>
               <th>Ширээ</th>
