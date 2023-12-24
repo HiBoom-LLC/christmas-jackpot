@@ -122,7 +122,7 @@ const Config = () => {
         time: timeString,
       })
     );
-    navigate("/");
+    navigate("/game1/jackpot");
   };
 
   const search = (code) => {

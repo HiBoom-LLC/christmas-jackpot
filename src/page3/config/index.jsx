@@ -104,7 +104,7 @@ const Config3 = () => {
         gift,
       })
     );
-    navigate("/");
+    navigate("/game3/jackpot");
   };
 
   const search = (code) => {
