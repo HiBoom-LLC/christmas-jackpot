@@ -10,6 +10,7 @@ import workersData from "../../assets/workers202312221712.json";
 // eslint-disable-next-line react/prop-types
 const Config3 = () => {
   const [userData, setUserData] = useState([]);
+  const [mainData, setMainData] = useState([]);
   const [gift, setGift] = useState("");
   const navigate = useNavigate();
   const [luckyMan, setLuckyMan] = useState([]);
@@ -80,6 +81,7 @@ const Config3 = () => {
           }
         });
         setUserData(matchedData);
+        setMainData(matchedData);
       }
     };
   };
@@ -102,7 +104,17 @@ const Config3 = () => {
         gift,
       })
     );
-    navigate("/game3/jackpot");
+    navigate("/");
+  };
+
+  const search = (code) => {
+    setUserData(
+      mainData.filter((item) => item?.["ID дугаар"].startsWith(code))
+    );
+  };
+
+  const searchName = (name) => {
+    setUserData(mainData.filter((item) => item?.[" Нэр"].startsWith(name)));
   };
 
   return (
@@ -138,9 +150,28 @@ const Config3 = () => {
           <thead>
             <tr>
               <th>№</th>
-              <th>ID</th>
+              <th>
+                <div className="d-flex">
+                  ID{" "}
+                  <input
+                    className="search"
+                    onChange={(e) => search(e.target.value)}
+                  />
+                </div>
+              </th>
               <th>Алба/Салбар</th>
-              <th>Нэр</th>
+              <th>
+                <div className="d-flex">
+                  Нэр{" "}
+                  <input
+                    className="search"
+                    style={{
+                      width: 120,
+                    }}
+                    onChange={(e) => searchName(e.target.value)}
+                  />
+                </div>
+              </th>
               <th>Ширээ</th>
               <th>Ирсэн цаг</th>
             </tr>

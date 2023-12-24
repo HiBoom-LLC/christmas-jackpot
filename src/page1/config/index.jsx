@@ -122,11 +122,17 @@ const Config = () => {
         time: timeString,
       })
     );
-    navigate("/game1/jackpot");
+    navigate("/");
   };
 
   const search = (code) => {
-    setUserData(excelData.filter((item) => item?.["ID дугаар"].startsWith(code) ));
+    setUserData(
+      excelData.filter((item) => item?.["ID дугаар"].startsWith(code))
+    );
+  };
+
+  const searchName = (name) => {
+    setUserData(excelData.filter((item) => item?.[" Нэр"].startsWith(name)));
   };
 
   return (
@@ -178,7 +184,18 @@ const Config = () => {
                 </div>
               </th>
               <th>Алба/Салбар</th>
-              <th>Нэр</th>
+              <th>
+                <div className="d-flex">
+                  Нэр{" "}
+                  <input
+                    className="search"
+                    style={{
+                      width: 120,
+                    }}
+                    onChange={(e) => searchName(e.target.value)}
+                  />
+                </div>
+              </th>
               <th>Ширээ</th>
               <th>Ирсэн цаг</th>
             </tr>
