@@ -20,7 +20,7 @@ export const Router = () => {
       element: <App />,
     },
     {
-      path: "/game1",
+      path: "game1",
       element: (
         <Layout>
           <Outlet />
