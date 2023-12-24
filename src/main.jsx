@@ -4,11 +4,13 @@ import App from "./App.jsx";
 import "./global.css";
 import {
   BrowserRouter,
+  HashRouter,
   Outlet,
   Route,
   RouterProvider,
   Routes,
   createBrowserRouter,
+  createHashRouter,
 } from "react-router-dom";
 import Layout from "./layout/index.jsx";
 import Jackpot from "./page1/jackpot/index.jsx";
@@ -20,7 +22,7 @@ import Config3 from "./page3/config/index.jsx";
 import MainContextProvider from "./mainContext.jsx";
 
 export const Router = () => {
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/",
       element: <App />,
@@ -85,13 +87,13 @@ export const Router = () => {
 
   return <RouterProvider router={router} />;
   // return (
-  //   <BrowserRouter basename="/">
+  //   <HashRouter>
   //     <Routes>
   //       <Route path="/" element={<App />} />
   //       <Route path="/game1/config" element={<Layout><Config /></Layout>} />
   //       <Route path="/game1/jackpot" element={<Layout><Jackpot /></Layout>} />
   //     </Routes>
-  //   </BrowserRouter>
+  //   </HashRouter>
   // );
 };
 
