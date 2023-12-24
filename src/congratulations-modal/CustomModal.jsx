@@ -69,6 +69,7 @@ const CustomModal = ({ show, onHide, title, data = null, gameKey }) => {
         isOpen={show}
         onRequestClose={onHide}
         style={customStyles}
+        ariaHideApp={false}
         contentLabel="Example Modal"
         closeTimeoutMS={100}
       >
@@ -99,15 +100,15 @@ const CustomModal = ({ show, onHide, title, data = null, gameKey }) => {
               <div className="winnerBox">
                 <div className="lucky-number">{data?.[" Нэр"]}</div>
                 <div className="lucky-info">
-                  <span>ID:</span>
+                  <span>ID</span>
                   <span>{data?.["ID дугаар"]}</span>
                 </div>
                 <div className="lucky-info">
-                  <span>Салбар:</span>
+                  <span>Салбар</span>
                   <span>{data?.["Алба/Салбар"]}</span>
                 </div>
                 <div className="lucky-info">
-                  <span>Ширээ:</span>
+                  <span>Ширээ</span>
                   <span>{data?.["Ширээний дугаар"]}</span>
                 </div>
               </div>

@@ -6,9 +6,11 @@ import Lottie from "lottie-react";
 import GameButton from "../../game-button";
 import CustomModal from "../../congratulations-modal/CustomModal";
 import { shuffle } from "../../mainContext";
+import { useNavigate } from "react-router-dom";
 
 const Jackpot3 = () => {
   const [loadingMain, setLoadingMain] = useState(true);
+  const navigate = useNavigate();
   const [state, setState] = useState({
     usersData: [],
   });
@@ -22,10 +24,24 @@ const Jackpot3 = () => {
     try {
       const game1Json = localStorage.getItem("game3");
       const game1Data = JSON.parse(game1Json);
+      const lmJson = localStorage.getItem("luckyMan");
+      let usersData = game1Data.usersData;
+      if (lmJson) {
+        const lm = JSON.parse(lmJson);
+        usersData = game1Data.usersData
+          .map((u) => {
+            const a = lm.find((l) => l?.["ID дугаар"] === u?.["ID дугаар"]);
+            if (!a) {
+              return u;
+            }
+            return null;
+          })
+          .filter((item) => item);
+      }
 
       setState({
         ...game1Data,
-        usersData: [...shuffle(game1Data.usersData)],
+        usersData: [...shuffle(usersData)],
       });
       setLoadingMain(false);
     } catch (err) {
@@ -40,7 +56,7 @@ const Jackpot3 = () => {
   }
 
   const startSpin = () => {
-    let audio = new Audio("/spin.mp3");
+    let audio = new Audio("/spin_short.mp3");
     audio.play();
     setWinner(null);
     setLoading(true);
@@ -75,7 +91,7 @@ const Jackpot3 = () => {
     setTimeout(() => {
       setShowModal(true);
       const audio = new Audio("/congrats.mp3");
-      audio.play();
+      audio?.play();
     }, 1000);
   };
 
@@ -95,7 +111,7 @@ const Jackpot3 = () => {
         data={winner}
         onHide={() => {
           setShowModal(false);
-          window.location.reload();
+          navigate(0);
         }}
         gameKey="game1"
       />
@@ -119,7 +135,7 @@ const Jackpot3 = () => {
               <div className="top-shadow"></div>
               <Slot
                 target={randomNumber}
-                duration={14150}
+                duration={8050}
                 times={2}
                 onEnd={() => {
                   setLoading(false);
@@ -128,17 +144,6 @@ const Jackpot3 = () => {
                   const winner = { ...state.usersData[winnerIndex] };
                   setWinner(winner);
                   setLuckyMan(winner);
-                  setTimeout(() => {
-                    setState((prev) => {
-                      prev.usersData.splice(winnerIndex, 1);
-                      const newState = {
-                        ...prev,
-                        usersData: [...prev.usersData],
-                      };
-                      localStorage.setItem("game3", JSON.stringify(newState));
-                      return newState;
-                    });
-                  }, 2000);
                 }}
                 className="slotPicker"
               >
@@ -171,7 +176,7 @@ const Jackpot3 = () => {
             Эхлүүлэх
           </GameButton>
         </div>
-        <h1 className="totalTitle">Нийт орологч: {state.usersData.length}</h1>
+        <h1 className="totalTitle">Нийт оролцогч: {state.usersData.length}</h1>
       </div>
     </div>
   );

@@ -188,7 +188,7 @@ const Config = () => {
         </table>
       </div>
       <div className="d-flex justify-content-between align-items-center">
-        <div className="total">Нийт орологч: {userData.length}</div>
+        <div className="total">Нийт оролцогч: {userData.length}</div>
         <Button
           onClick={() => {
             configDone();

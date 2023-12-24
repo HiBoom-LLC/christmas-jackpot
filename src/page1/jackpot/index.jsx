@@ -6,9 +6,11 @@ import Lottie from "lottie-react";
 import GameButton from "../../game-button";
 import CustomModal from "../../congratulations-modal/CustomModal";
 import { shuffle } from "../../mainContext";
+import { useNavigate } from "react-router-dom";
 
 const Jackpot = () => {
   const [loadingMain, setLoadingMain] = useState(true);
+  const navigate = useNavigate();
   const [state, setState] = useState({
     usersData: [],
   });
@@ -22,10 +24,24 @@ const Jackpot = () => {
     try {
       const game1Json = localStorage.getItem("game1");
       const game1Data = JSON.parse(game1Json);
+      const lmJson = localStorage.getItem("luckyMan");
+      let usersData = game1Data.usersData;
+      if (lmJson) {
+        const lm = JSON.parse(lmJson);
+        usersData = game1Data.usersData
+          .map((u) => {
+            const a = lm.find((l) => l?.["ID дугаар"] === u?.["ID дугаар"]);
+            if (!a) {
+              return u;
+            }
+            return null;
+          })
+          .filter((item) => item);
+      }
 
       setState({
         ...game1Data,
-        usersData: [...shuffle(game1Data.usersData)],
+        usersData: [...shuffle(usersData)],
       });
       setLoadingMain(false);
     } catch (err) {
@@ -95,7 +111,7 @@ const Jackpot = () => {
         data={winner}
         onHide={() => {
           setShowModal(false);
-          window.location.reload();
+          navigate(0);
         }}
         gameKey="game1"
       />
@@ -104,7 +120,7 @@ const Jackpot = () => {
           padding: "0 120px",
         }}
       >
-        <h1 className="totalTitle">Нийт орологч: {state.usersData.length}</h1>
+        <h1 className="totalTitle">Нийт оролцогч: {state.usersData.length}</h1>
         <div className="jackpotMachine">
           <div className="jackpot">
             <Lottie
@@ -128,17 +144,6 @@ const Jackpot = () => {
                   const winner = { ...state.usersData[winnerIndex] };
                   setWinner(winner);
                   setLuckyMan(winner);
-                  setTimeout(() => {
-                    setState((prev) => {
-                      prev.usersData.splice(winnerIndex, 1);
-                      const newState = {
-                        ...prev,
-                        usersData: [...prev.usersData],
-                      };
-                      localStorage.setItem("game1", JSON.stringify(newState));
-                      return newState;
-                    });
-                  }, 2000);
                 }}
                 className="slotPicker"
               >
