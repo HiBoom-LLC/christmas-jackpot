@@ -12,6 +12,7 @@ import workersData from "../../assets/workers202312221712.json";
 const Config = () => {
   const [timeString, setTimeString] = useState("");
   const [userData, setUserData] = useState([]);
+  const [mainData, setMainData] = useState([]);
   const [excelData, setExcelData] = useState([]);
   const [luckyMan, setLuckyMan] = useState([]);
   const navigate = useNavigate();
@@ -96,12 +97,13 @@ const Config = () => {
 
         setExcelData(matchedData);
         setUserData(matchedData);
+        setMainData(matchedData);
       }
     };
   };
 
   const configDone = () => {
-    if (!userData || userData?.length <= 0) {
+    if (!mainData || mainData?.length <= 0) {
       toast.warn("Оролцогчдийн бүртгэл файл оруулна уу.");
       return;
     }
@@ -118,7 +120,7 @@ const Config = () => {
     localStorage.setItem(
       "game1",
       JSON.stringify({
-        usersData: userData,
+        usersData: mainData,
         time: timeString,
       })
     );
@@ -127,12 +129,12 @@ const Config = () => {
 
   const search = (code) => {
     setUserData(
-      excelData.filter((item) => item?.["ID дугаар"].startsWith(code))
+      mainData.filter((item) => item?.["ID дугаар"].startsWith(code))
     );
   };
 
   const searchName = (name) => {
-    setUserData(excelData.filter((item) => item?.[" Нэр"].startsWith(name)));
+    setUserData(mainData.filter((item) => item?.[" Нэр"].startsWith(name)));
   };
 
   return (
@@ -159,12 +161,12 @@ const Config = () => {
               const date = dayjs(e.target.value);
 
               const timeDataKeys = Object.keys(excelData[0]);
-              setUserData(
-                excelData.filter((item) => {
-                  const date2 = dayjs(item?.[timeDataKeys[2]]);
-                  return date2.diff(date) < 0;
-                })
-              );
+              const dddd = excelData.filter((item) => {
+                const date2 = dayjs(item?.[timeDataKeys[2]]);
+                return date2.diff(date) < 0;
+              });
+              setUserData(dddd);
+              setMainData(dddd);
             }
           }}
         />
